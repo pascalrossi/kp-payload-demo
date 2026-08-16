@@ -385,7 +385,6 @@ export default function HomePage() {
                 gap: '24px 48px',
                 maxWidth: 860,
               }}
-              onSubmit={(e) => e.preventDefault()}
             >
               {/* Salutation */}
               <div style={{ gridColumn: '1 / -1', display: 'flex', gap: 32 }}>
