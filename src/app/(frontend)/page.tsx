@@ -1,6 +1,9 @@
 import { getPayload } from 'payload'
 import config from '../../payload.config'
 
+// Nie statisch pre-rendern — DB muss zur Laufzeit vorhanden sein
+export const dynamic = 'force-dynamic'
+
 // Kein API-Call nötig — Payload direkt importieren (server-side)
 export default async function HomePage() {
   const payload = await getPayload({ config })
