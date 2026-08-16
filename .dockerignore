@@ -1,0 +1,7 @@
+.next
+node_modules
+*.db
+*.db-journal
+.git
+.env
+.env.local
