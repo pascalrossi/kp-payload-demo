@@ -42,6 +42,7 @@ export default buildConfig({
     client: {
       url: databaseUrl,
     },
+    push: true,
   }),
   secret: process.env.PAYLOAD_SECRET || 'dev-secret-change-in-production',
   typescript: {
