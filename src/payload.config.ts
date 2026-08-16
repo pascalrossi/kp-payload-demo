@@ -7,6 +7,7 @@ import { fileURLToPath } from 'url'
 import { Team } from './collections/Team'
 import { Pages } from './collections/Pages'
 import { Media } from './collections/Media'
+import { migrations } from './migrations'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -42,7 +43,8 @@ export default buildConfig({
     client: {
       url: databaseUrl,
     },
-    push: true,
+    migrationDir: path.resolve(dirname, './migrations'),
+    prodMigrations: migrations,
   }),
   secret: process.env.PAYLOAD_SECRET || 'dev-secret-change-in-production',
   typescript: {
