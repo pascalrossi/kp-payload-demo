@@ -42,7 +42,7 @@ export const Pages: CollectionConfig = {
         },
         {
           slug: 'servicesGrid',
-          label: 'Services Grid',
+          labels: { singular: 'Services Grid', plural: 'Services Grids' },
           fields: [
             { name: 'sectionLabel', type: 'text', localized: true },
             {
@@ -60,7 +60,7 @@ export const Pages: CollectionConfig = {
         },
         {
           slug: 'philosophySection',
-          label: 'Philosophy Section',
+          labels: { singular: 'Philosophy Section', plural: 'Philosophy Sections' },
           fields: [
             { name: 'label', type: 'text', localized: true },
             { name: 'title', type: 'text', localized: true },
