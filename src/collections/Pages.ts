@@ -1,6 +1,5 @@
 import type { CollectionConfig } from 'payload'
 
-// Ersetzt: WordPress Pages + ACF Pro Flexible Content
 export const Pages: CollectionConfig = {
   slug: 'pages',
   admin: {
@@ -20,7 +19,6 @@ export const Pages: CollectionConfig = {
       required: true,
       unique: true,
     },
-    // Flexible Sections — ersetzt ACF Flexible Content
     {
       name: 'sections',
       type: 'blocks',
@@ -40,6 +38,34 @@ export const Pages: CollectionConfig = {
                 { name: 'url', type: 'text' },
               ],
             },
+          ],
+        },
+        {
+          slug: 'servicesGrid',
+          label: 'Services Grid',
+          fields: [
+            { name: 'sectionLabel', type: 'text', localized: true },
+            {
+              name: 'services',
+              type: 'array',
+              localized: true,
+              fields: [
+                { name: 'title', type: 'text' },
+                { name: 'description', type: 'textarea' },
+                { name: 'ctaLabel', type: 'text' },
+                { name: 'ctaUrl', type: 'text' },
+              ],
+            },
+          ],
+        },
+        {
+          slug: 'philosophySection',
+          label: 'Philosophy Section',
+          fields: [
+            { name: 'label', type: 'text', localized: true },
+            { name: 'title', type: 'text', localized: true },
+            { name: 'body', type: 'textarea', localized: true },
+            { name: 'videoUrl', type: 'text' },
           ],
         },
         {
