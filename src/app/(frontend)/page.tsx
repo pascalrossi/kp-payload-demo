@@ -1,492 +1,311 @@
 export const dynamic = 'force-dynamic'
 
-const C = {
-  bg: 'rgb(236, 236, 230)',
-  text: 'rgb(87, 87, 87)',
-  accent: 'rgb(219, 118, 62)',
-  border: 'rgb(196, 193, 189)',
-  newsletterBg: 'rgb(241, 242, 237)',
-}
+// ─── Design tokens from kaiserpartner.com ───────────────────────────────────
+const BG    = 'rgb(236, 236, 230)'
+const TEXT  = 'rgb(87, 87, 87)'
+const ACCENT= 'rgb(219, 118, 62)'
+const BORDER= 'rgb(196, 193, 189)'
+const NEWS_BG = 'rgb(241, 242, 237)'
 
-const F = "'Raleway', 'Calibri Light', 'Calibri', 'Segoe UI', sans-serif"
+// Font stacks — Typekit loads Calibri Light/Bold + Cambria if allowed for this subdomain
+const CALIBRI_LIGHT = '"Calibri Light", "Lato", "Segoe UI", Arial, sans-serif'
+const CALIBRI_BOLD  = '"Calibri Bold",  "Lato", "Segoe UI", Arial, sans-serif'
+const CAMBRIA       = 'Cambria, Georgia, serif'
 
+// ─── Service data ────────────────────────────────────────────────────────────
 const SERVICES = [
-  {
-    title: 'Wealth Advisory',
-    desc: 'Our goal is to safeguard wealth down the generations. We bring the best experts together and coordinate external partners at our Wealth Table:',
-    cta: 'TAKE A SEAT',
-    href: 'https://kaiserpartner.com/services/wealth-advisory/',
-  },
-  {
-    title: 'Reporting & Controlling',
-    desc: 'A reliable overview of how your assets are performing will give you greater certainty. Our services offer new insights and control options:',
-    cta: 'GAIN INSIGHTS',
-    href: 'https://kaiserpartner.com/services/wealth-reporting-and-controlling/',
-  },
-  {
-    title: 'Family Office',
-    desc: 'We support wealthy families: concierge services, family seminars and advice on, for example, relocation, private investments, real estate, philanthropy and education.',
-    cta: 'LET US HELP',
-    href: 'https://kaiserpartner.com/services/family-office/',
-  },
-  {
-    title: 'Fiduciary Services',
-    desc: 'Wealth benefits from an appropriate structure. We can advise you and set up structures for you to suit your needs, including family foundations, holding structures and trusts in Liechtenstein and around the world.',
-    cta: 'USE STRUCTURES',
-    href: 'https://kaiserpartner.com/services/fiduciary-services/',
-  },
-  {
-    title: 'Asset Protection',
-    desc: 'Protect what is most important to you. We grow wealth sustainably and create concepts for structures to protect your assets comprehensively and for the long term.',
-    cta: 'PROTECTING ASSETS',
-    href: 'https://kaiserpartner.com/solution/asset-protection-a-holistic-task/',
-  },
-  {
-    title: 'Inheritance Planning',
-    desc: 'Businesses, property, collections... wealth comes in many shapes and forms. Transferring assets to the next generation is often complex, but with the right strategy, you can safeguard your interests.',
-    cta: 'TAKE PRECAUTIONS',
-    href: 'https://kaiserpartner.com/solution/good-inheritance-planning-doesnt-happen-under-time-pressure/',
-  },
+  { title: 'Wealth Advisory',        desc: 'Our goal is to safeguard wealth down the generations. We bring the best experts together and coordinate external partners at our Wealth Table:', cta: 'TAKE A SEAT',       href: 'https://kaiserpartner.com/services/wealth-advisory/' },
+  { title: 'Reporting & Controlling',desc: 'A reliable overview of how your assets are performing will give you greater certainty. Our services offer new insights and control options:',   cta: 'GAIN INSIGHTS',    href: 'https://kaiserpartner.com/services/wealth-reporting-and-controlling/' },
+  { title: 'Family Office',          desc: 'We support wealthy families: concierge services, family seminars and advice on, for example, relocation, private investments, real estate, philanthropy and education.', cta: 'LET US HELP',   href: 'https://kaiserpartner.com/services/family-office/' },
+  { title: 'Fiduciary Services',     desc: 'Wealth benefits from an appropriate structure. We can advise you and set up structures for you to suit your needs, including family foundations, holding structures and trusts in Liechtenstein and around the world.', cta: 'USE STRUCTURES', href: 'https://kaiserpartner.com/services/fiduciary-services/' },
+  { title: 'Asset Protection',       desc: 'Protect what is most important to you. We grow wealth sustainably and create concepts for structures to protect your assets comprehensively and for the long term.',     cta: 'PROTECTING ASSETS', href: 'https://kaiserpartner.com/solution/asset-protection-a-holistic-task/' },
+  { title: 'Inheritance Planning',   desc: 'Businesses, property, collections... wealth comes in many shapes and forms. Transferring assets to the next generation is often complex, but with the right strategy, you can safeguard your interests.', cta: 'TAKE PRECAUTIONS', href: 'https://kaiserpartner.com/solution/good-inheritance-planning-doesnt-happen-under-time-pressure/' },
 ]
 
 export default function HomePage() {
   return (
     <>
       <style>{`
-        * { box-sizing: border-box; }
-        ::selection { background: rgb(219, 118, 62); color: #fff; }
-        a.service-card { display: block; border: 1px solid rgb(196, 193, 189); padding: 60px 30px 30px; text-decoration: none; color: inherit; transition: border-color 0.2s, box-shadow 0.2s; }
-        a.service-card:hover { border-color: rgb(219, 118, 62); box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
-        a.service-card:hover .svc-cta { opacity: 0.7; }
-        .nav-link { transition: color 0.15s; }
-        .nav-link:hover { color: rgb(219, 118, 62) !important; }
-        .play-btn { transition: transform 0.2s; }
-        .video-wrap:hover .play-btn { transform: scale(1.08); }
-        .scroll-arrow { animation: bounce 2s infinite; }
-        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
-        @media (max-width: 900px) {
-          .hero-inner { flex-direction: column !important; }
-          .hero-text { padding: 60px 32px !important; }
-          .services-grid { grid-template-columns: repeat(2, 1fr) !important; }
-          .philosophy-inner { flex-direction: column !important; }
-          .page-padding { padding-left: 32px !important; padding-right: 32px !important; }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: ${BG}; color: ${TEXT}; }
+
+        /* ── Nav ── */
+        .kp-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; height: 76px; background: ${BG}; display: flex; align-items: center; }
+        .kp-nav-inner { width: 100%; max-width: 990px; margin: 0 auto; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; }
+        .kp-nav-links { display: flex; align-items: center; gap: 36px; }
+        .kp-nav-link { font-family: ${CAMBRIA}; font-size: 19px; font-weight: 400; color: ${TEXT}; text-decoration: none; text-transform: uppercase; }
+        .kp-nav-link:hover { color: ${ACCENT}; }
+        .kp-nav-contact { font-family: ${CALIBRI_LIGHT}; font-size: 15.2px; color: ${ACCENT}; text-decoration: none; text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px; }
+
+        /* ── Hero ── */
+        .kp-hero { min-height: calc(100vh - 76px); display: flex; align-items: stretch; overflow: hidden; }
+        .kp-hero-text { flex: 0 0 40%; display: flex; flex-direction: column; justify-content: center; padding: 100px 60px 80px 80px; }
+        .kp-hero-image { flex: 1; display: flex; align-items: flex-end; }
+        .kp-hero-image img { width: 100%; height: auto; display: block; }
+
+        /* ── Section container ── */
+        .kp-container { max-width: 990px; margin: 0 auto; padding: 0 15px; }
+
+        /* ── Services ── */
+        .kp-services { border-top: 1px solid ${BORDER}; padding: 60px 0 120px; }
+        .kp-svc-grid { display: flex; flex-wrap: wrap; margin: 0 -15px; }
+        .kp-svc-col { flex: 0 0 33.333%; padding: 0 15px; margin-bottom: 30px; }
+        .kp-svc-card { border: 1px solid ${BORDER}; padding: 60px 25px 25px; height: 100%; display: flex; flex-direction: column; text-decoration: none; color: inherit; transition: border-color 0.2s; }
+        .kp-svc-card:hover { border-color: ${ACCENT}; }
+        .kp-svc-card:hover .kp-svc-cta { opacity: 0.7; }
+        .kp-svc-title { font-family: ${CALIBRI_BOLD}; font-size: 20.9px; font-weight: 700; color: ${TEXT}; line-height: 1.1; margin-bottom: 12px; }
+        .kp-svc-desc { font-family: ${CALIBRI_LIGHT}; font-size: 20.9px; font-weight: 300; color: ${TEXT}; line-height: 1.5; flex: 1; margin-bottom: 24px; }
+        .kp-svc-cta { font-family: ${CALIBRI_BOLD}; font-size: 20.9px; font-weight: 700; color: ${ACCENT}; text-transform: uppercase; transition: opacity 0.2s; }
+
+        /* ── Philosophy ── */
+        .kp-philo { border-top: 1px solid ${BORDER}; }
+        .kp-philo-banner { padding: 40px 0 0; margin-bottom: 40px; }
+        .kp-philo-inner { padding-bottom: 80px; }
+        .kp-philo-row { display: flex; gap: 0; margin: 0 -15px; }
+        .kp-philo-col { flex: 0 0 50%; padding: 0 15px; }
+        .kp-philo-video { position: relative; aspect-ratio: 16/9; overflow: hidden; background: #1a1a1a; cursor: pointer; }
+        .kp-philo-video img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .kp-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+        .kp-play-btn { width: 80px; height: 80px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center; transition: transform 0.2s; }
+        .kp-philo-video:hover .kp-play-btn { transform: scale(1.08); }
+        .kp-play-arrow { width: 0; height: 0; border-style: solid; border-width: 14px 0 14px 28px; border-color: transparent transparent transparent rgba(255,255,255,0.95); margin-left: 8px; }
+
+        /* ── Section labels ── */
+        .kp-label { font-family: ${CAMBRIA}; font-size: 19px; font-weight: 500; color: ${ACCENT}; text-transform: uppercase; line-height: 1.1; }
+        .kp-h1 { font-family: ${CALIBRI_LIGHT}; font-size: 57px; font-weight: 400; color: ${TEXT}; line-height: 1.1; }
+        .kp-h2 { font-family: ${CALIBRI_LIGHT}; font-size: 38px; font-weight: 400; color: ${TEXT}; line-height: 1.1; }
+        .kp-body { font-family: ${CALIBRI_LIGHT}; font-size: 20.9px; font-weight: 300; color: ${TEXT}; line-height: 1.5; }
+
+        /* ── Contact form ── */
+        .kp-contact { background: ${NEWS_BG}; border-top: 1px solid ${BORDER}; padding: 80px 0; }
+        .kp-form { display: grid; grid-template-columns: 1fr 1fr; gap: 32px 60px; max-width: 860px; }
+        .kp-field { display: flex; flex-direction: column; gap: 8px; }
+        .kp-field label { font-family: ${CAMBRIA}; font-size: 13px; font-weight: 400; color: ${TEXT}; text-transform: uppercase; letter-spacing: 0.08em; }
+        .kp-field input, .kp-field select, .kp-field textarea { font-family: ${CALIBRI_LIGHT}; font-size: 16px; font-weight: 300; color: ${TEXT}; background: transparent; border: none; border-bottom: 1px solid ${BORDER}; padding: 8px 0; outline: none; width: 100%; appearance: none; resize: none; }
+        .kp-btn { font-family: ${CAMBRIA}; font-size: 14px; font-weight: 400; color: #fff; background: ${ACCENT}; border: none; padding: 14px 44px; cursor: pointer; text-transform: uppercase; letter-spacing: 0.08em; }
+
+        /* ── Footer ── */
+        .kp-footer { background: ${BG}; border-top: 1px solid ${BORDER}; padding: 32px 0; }
+        .kp-footer-inner { display: flex; justify-content: space-between; align-items: center; font-family: ${CALIBRI_LIGHT}; font-size: 15.2px; font-weight: 300; color: ${TEXT}; }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+          .kp-hero { flex-direction: column; }
+          .kp-hero-text { flex: none; padding: 60px 24px; }
+          .kp-hero-image { flex: none; }
+          .kp-svc-col { flex: 0 0 100%; }
+          .kp-philo-row { flex-direction: column; }
+          .kp-form { grid-template-columns: 1fr; }
+          .kp-nav-links { display: none; }
+          .kp-h1 { font-size: 38px; }
         }
-        @media (max-width: 600px) {
-          .services-grid { grid-template-columns: 1fr !important; }
-          .nav-items { display: none; }
+        @media (max-width: 992px) and (min-width: 769px) {
+          .kp-svc-col { flex: 0 0 50%; }
         }
       `}</style>
 
-      {/* NAV */}
-      <header style={{
-        position: 'fixed',
-        top: 0, left: 0, right: 0,
-        zIndex: 200,
-        height: 76,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '0 60px',
-        background: C.bg,
-        borderBottom: `1px solid ${C.border}`,
-      }}>
-        <a href="/" style={{ display: 'flex', alignItems: 'center', lineHeight: 0 }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="https://kaiserpartner.com/wp-content/themes/kp-wp-theme/img/illustrations/logo.svg"
-            alt="Kaiser Partner"
-            height={38}
-            width="auto"
-          />
-        </a>
-        <nav className="nav-items" style={{ display: 'flex', alignItems: 'center', gap: 44 }}>
-          {['WHY US', 'SERVICES', 'TEAM', 'CAREER'].map(item => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase().replace(' ', '-')}`}
-              className="nav-link"
-              style={{
-                fontFamily: F,
-                fontSize: 19,
-                fontWeight: 100,
-                color: C.text,
-                textDecoration: 'none',
-                textTransform: 'uppercase' as const,
-                letterSpacing: '0.02em',
-              }}
-            >
-              {item}
-            </a>
-          ))}
-          <a
-            href="#contact"
-            className="nav-link"
-            style={{
-              fontFamily: F,
-              fontSize: 15,
-              fontWeight: 100,
-              color: C.accent,
-              textDecoration: 'none',
-              textTransform: 'uppercase' as const,
-              letterSpacing: '0.06em',
-            }}
-          >
-            CONTACT
+      {/* ── NAV ──────────────────────────────────────────────────────── */}
+      <header className="kp-nav">
+        <div className="kp-nav-inner">
+          {/* Logo SVG */}
+          <a href="/" style={{ lineHeight: 0 }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://kaiserpartner.com/wp-content/themes/kp-wp-theme/img/illustrations/logo.svg"
+              alt="Kaiser Partner"
+              height={38}
+            />
           </a>
-        </nav>
+
+          {/* Nav links */}
+          <nav className="kp-nav-links">
+            {['WHY US', 'SERVICES', 'TEAM', 'CAREER'].map(item => (
+              <a key={item} href={`#${item.toLowerCase().replace(' ', '-')}`} className="kp-nav-link">
+                {item}
+              </a>
+            ))}
+            {/* Separator nav item — Contact label (gray, Cambria, like the real site) */}
+            <a href="#contact" className="kp-nav-link">Contact</a>
+          </nav>
+
+          {/* CONTACT CTA — terracotta, Calibri Light, with arrow icon */}
+          <a href="#contact" className="kp-nav-contact">
+            CONTACT
+            <svg width="18" height="14" viewBox="0 0 18 14" fill="none" aria-hidden="true">
+              <path d="M1 7h16M11 1l6 6-6 6" stroke={ACCENT} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </a>
+        </div>
       </header>
 
-      <main style={{ paddingTop: 76, background: C.bg, fontFamily: F, color: C.text }}>
-
-        {/* HERO */}
-        <section style={{ minHeight: 'calc(100vh - 76px)', display: 'flex', alignItems: 'stretch' }}>
-          <div className="hero-inner" style={{ display: 'flex', width: '100%', alignItems: 'center' }}>
-            <div
-              className="hero-text"
-              style={{ flex: 1, padding: '80px 60px 80px 120px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
-            >
-              <h1 style={{
-                fontFamily: F,
-                fontSize: 'clamp(2.5rem, 4.5vw, 57px)',
-                fontWeight: 500,
-                color: C.text,
-                margin: 0,
-                lineHeight: 1.1,
-              }}>
-                Responsibility in Wealth
-              </h1>
-              <p style={{
-                fontFamily: F,
-                fontSize: 20.9,
-                fontWeight: 100,
-                color: C.text,
-                marginTop: 20,
-                marginBottom: 0,
-              }}>
-                Kaiser Partner Wealth Advisors
-              </p>
-              <div className="scroll-arrow" style={{ marginTop: 80, color: C.accent, fontSize: 28 }}>
-                ↓
-              </div>
-            </div>
-            <div style={{ flex: 1, overflow: 'hidden', alignSelf: 'stretch', display: 'flex', alignItems: 'flex-end' }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="https://kaiserpartner.com/wp-content/uploads/2018/03/KP-Campus.png"
-                alt="Kaiser Partner Campus"
-                style={{ width: '100%', height: 'auto', display: 'block' }}
-              />
-            </div>
+      {/* ── HERO ─────────────────────────────────────────────────────── */}
+      <section className="kp-hero" style={{ paddingTop: 76 }}>
+        {/* Text column ~40% */}
+        <div className="kp-hero-text">
+          <h1 className="kp-h1" style={{ marginBottom: 16 }}>
+            Responsibility in Wealth
+          </h1>
+          <h2 className="kp-h2">
+            Kaiser Partner<br />Wealth Advisors
+          </h2>
+          {/* Bouncing down-arrow */}
+          <div style={{ marginTop: 80, color: ACCENT, fontSize: 28, animation: 'kp-bounce 2s infinite' }}>
+            <style>{`@keyframes kp-bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }`}</style>
+            ↓
           </div>
-        </section>
+        </div>
 
-        {/* SERVICES */}
-        <section id="services" style={{ borderTop: `1px solid ${C.border}` }}>
-          <div className="page-padding" style={{ padding: '80px 120px' }}>
-            <h4 style={{
-              fontFamily: F,
-              fontSize: 19,
-              fontWeight: 500,
-              color: C.accent,
-              margin: '0 0 20px',
-              textTransform: 'uppercase',
-              letterSpacing: '0.04em',
-            }}>
-              SERVICES
-            </h4>
-            <h2 style={{
-              fontFamily: F,
-              fontSize: 'clamp(2rem, 4.5vw, 57px)',
-              fontWeight: 500,
-              color: C.text,
-              margin: '0 0 64px',
-              lineHeight: 1.1,
-            }}>
-              Learn how we can work best for you.
-            </h2>
-            <div
-              className="services-grid"
-              style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 28 }}
-            >
-              {SERVICES.map((svc, i) => (
-                <a key={i} href={svc.href} className="service-card" target="_blank" rel="noopener noreferrer">
-                  <h3 style={{
-                    fontFamily: F,
-                    fontSize: 20.9,
-                    fontWeight: 500,
-                    color: C.text,
-                    margin: '0 0 16px',
-                    lineHeight: 1.3,
-                  }}>
-                    {svc.title}
-                  </h3>
-                  <p style={{
-                    fontFamily: F,
-                    fontSize: 20.9,
-                    fontWeight: 100,
-                    color: C.text,
-                    margin: '0 0 28px',
-                    lineHeight: 1.6,
-                  }}>
-                    {svc.desc}
-                  </p>
-                  <span
-                    className="svc-cta"
-                    style={{
-                      fontFamily: F,
-                      fontSize: 14,
-                      fontWeight: 400,
-                      color: C.accent,
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.12em',
-                      transition: 'opacity 0.2s',
-                    }}
-                  >
-                    {svc.cta}
-                  </span>
+        {/* Building image ~60% */}
+        <div className="kp-hero-image">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="https://kaiserpartner.com/wp-content/uploads/2018/03/KP-Campus.png"
+            alt="Kaiser Partner Campus Vaduz"
+          />
+        </div>
+      </section>
+
+      {/* ── SERVICES ─────────────────────────────────────────────────── */}
+      <section className="kp-services" id="services">
+        <div className="kp-container">
+          {/* Label */}
+          <h4 className="kp-label" style={{ marginBottom: 7.6 }}>SERVICES</h4>
+
+          {/* Big heading — margin: 50px top, 120px bottom (from real site) */}
+          <h2 className="kp-h1" style={{ marginTop: 50, marginBottom: 120 }}>
+            Learn how we can work best for you.
+          </h2>
+
+          {/* 3-col grid matching Bootstrap col-lg-4 */}
+          <div className="kp-svc-grid">
+            {SERVICES.map((svc, i) => (
+              <div key={i} className="kp-svc-col">
+                <a href={svc.href} className="kp-svc-card" target="_blank" rel="noopener noreferrer">
+                  <div className="kp-svc-title">{svc.title}</div>
+                  <p className="kp-svc-desc">{svc.desc}</p>
+                  <span className="kp-svc-cta">{svc.cta}</span>
                 </a>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* OUR PHILOSOPHY */}
-        <section id="why-us" style={{ borderTop: `1px solid ${C.border}` }}>
+      {/* ── OUR PHILOSOPHY ───────────────────────────────────────────── */}
+      <section className="kp-philo" id="why-us">
+        <div className="kp-container">
           {/* Label banner */}
-          <div className="page-padding" style={{
-            padding: '24px 120px',
-            borderBottom: `1px solid ${C.border}`,
-          }}>
-            <h4 style={{
-              fontFamily: F,
-              fontSize: 19,
-              fontWeight: 500,
-              color: C.accent,
-              margin: 0,
-              textTransform: 'uppercase',
-              letterSpacing: '0.04em',
-            }}>
-              OUR PHILOSOPHY
-            </h4>
+          <div className="kp-philo-banner">
+            <h4 className="kp-label">OUR PHILOSOPHY</h4>
           </div>
-          <div className="philosophy-inner page-padding" style={{
-            display: 'flex',
-            gap: 64,
-            padding: '80px 120px',
-            alignItems: 'flex-start',
-          }}>
-            {/* Text */}
-            <div style={{ flex: 1 }}>
-              <h2 style={{
-                fontFamily: F,
-                fontSize: 'clamp(2rem, 4.5vw, 57px)',
-                fontWeight: 500,
-                color: C.text,
-                margin: '0 0 36px',
-                lineHeight: 1.1,
-              }}>
-                A guide for Wealthy Owners
-              </h2>
-              <p style={{
-                fontFamily: F,
-                fontSize: 20.9,
-                fontWeight: 100,
-                color: C.text,
-                lineHeight: 1.75,
-                margin: '0 0 48px',
-              }}>
-                The world is changing faster and more fundamentally than at any time in history. Therefore, we need to change the way wealth is managed and created. &ldquo;If &hellip;&rdquo;, the film of Kaiser Partner, summarizes our vision of how to navigate wealth in these unprecedented times.
-              </p>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="https://kaiserpartner.com/wp-content/themes/kp-wp-theme/img/if.png"
-                alt="if..."
-                style={{ maxWidth: 180, height: 'auto' }}
-              />
-            </div>
-            {/* Video */}
-            <div style={{ flex: 1 }}>
-              <a
-                href="https://www.youtube.com/watch?v=HXpPIBicBNQ"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="video-wrap"
-                style={{ display: 'block', position: 'relative', background: '#1a1a1a', aspectRatio: '16/9', overflow: 'hidden' }}
-              >
+
+          <div className="kp-philo-inner">
+            <div className="kp-philo-row">
+              {/* Text column */}
+              <div className="kp-philo-col">
+                <h2 className="kp-h1" style={{ marginBottom: 36 }}>A guide for Wealthy Owners</h2>
+                <p className="kp-body" style={{ marginBottom: 48 }}>
+                  The world is changing faster and more fundamentally than at any time in history.
+                  Therefore, we need to change the way wealth is managed and created.
+                  &ldquo;If &hellip;&rdquo;, the film of Kaiser Partner, summarizes our vision
+                  of how to navigate wealth in these unprecedented times.
+                </p>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="https://kaiserpartner.com/wp-content/themes/kp-wp-theme/img/Sam.Running.gif"
-                  alt="Philosophy"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                  src="https://kaiserpartner.com/wp-content/themes/kp-wp-theme/img/if.png"
+                  alt="if..."
+                  style={{ maxWidth: 160, height: 'auto' }}
                 />
-                <div style={{
-                  position: 'absolute',
-                  inset: 0,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  background: 'rgba(0,0,0,0.15)',
-                }}>
-                  <div
-                    className="play-btn"
-                    style={{
-                      width: 80,
-                      height: 80,
-                      borderRadius: '50%',
-                      border: '2px solid rgba(255,255,255,0.9)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      background: 'rgba(0,0,0,0.2)',
-                    }}
-                  >
-                    <div style={{
-                      width: 0,
-                      height: 0,
-                      borderStyle: 'solid',
-                      borderWidth: '13px 0 13px 26px',
-                      borderColor: 'transparent transparent transparent rgba(255,255,255,0.95)',
-                      marginLeft: 7,
-                    }} />
+              </div>
+
+              {/* Video column */}
+              <div className="kp-philo-col">
+                <a
+                  href="https://www.youtube.com/watch?v=HXpPIBicBNQ"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="kp-philo-video"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="https://kaiserpartner.com/wp-content/themes/kp-wp-theme/img/Sam.Running.gif"
+                    alt="Kaiser Partner philosophy film"
+                  />
+                  <div className="kp-play">
+                    <div className="kp-play-btn">
+                      <div className="kp-play-arrow" />
+                    </div>
                   </div>
-                </div>
-              </a>
+                </a>
+              </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* CONTACT / GET IN TOUCH */}
-        <section id="contact" style={{ background: C.newsletterBg, borderTop: `1px solid ${C.border}` }}>
-          <div className="page-padding" style={{ padding: '80px 120px' }}>
-            <h2 style={{
-              fontFamily: F,
-              fontSize: 'clamp(2rem, 4.5vw, 57px)',
-              fontWeight: 500,
-              color: C.text,
-              margin: '0 0 20px',
-              lineHeight: 1.1,
-            }}>
-              Get in touch
-            </h2>
-            <p style={{
-              fontFamily: F,
-              fontSize: 20.9,
-              fontWeight: 100,
-              color: C.text,
-              margin: '0 0 56px',
-              maxWidth: 600,
-            }}>
-              Contact us for personal advice and solutions tailored to your needs for your portfolio.
-            </p>
-            <form
-              style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr',
-                gap: '24px 48px',
-                maxWidth: 860,
-              }}
-            >
-              {/* Salutation */}
-              <div style={{ gridColumn: '1 / -1', display: 'flex', gap: 32 }}>
-                {['Mr', 'Ms'].map(s => (
-                  <label key={s} style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer', fontFamily: F, fontSize: 20.9, fontWeight: 100, color: C.text }}>
-                    <input type="radio" name="salutation" value={s} style={{ accentColor: C.accent, width: 16, height: 16 }} />
-                    {s}
-                  </label>
+      {/* ── GET IN TOUCH ─────────────────────────────────────────────── */}
+      <section className="kp-contact" id="contact">
+        <div className="kp-container">
+          <h2 className="kp-h1" style={{ marginBottom: 20 }}>Get in touch</h2>
+          <p className="kp-body" style={{ marginBottom: 56, maxWidth: 600 }}>
+            Contact us for personal advice and solutions tailored to your needs for your portfolio.
+          </p>
+
+          <form className="kp-form" action="/api/contact" method="POST">
+            {/* Salutation */}
+            <div style={{ gridColumn: '1 / -1', display: 'flex', gap: 32 }}>
+              {['Mr', 'Ms'].map(s => (
+                <label key={s} style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer', fontFamily: CALIBRI_LIGHT, fontSize: 20.9, fontWeight: 300, color: TEXT }}>
+                  <input type="radio" name="salutation" value={s} style={{ accentColor: ACCENT, width: 16, height: 16 }} />
+                  {s}
+                </label>
+              ))}
+            </div>
+
+            <div className="kp-field">
+              <label>First Name</label>
+              <input type="text" name="firstName" />
+            </div>
+            <div className="kp-field">
+              <label>Last Name</label>
+              <input type="text" name="lastName" />
+            </div>
+            <div className="kp-field">
+              <label>Email</label>
+              <input type="email" name="email" />
+            </div>
+            <div className="kp-field">
+              <label>Country</label>
+              <select name="country">
+                <option value="">Please select</option>
+                {['Austria', 'Germany', 'Liechtenstein', 'Luxembourg', 'Switzerland', 'United Kingdom', 'United States'].map(c => (
+                  <option key={c} value={c}>{c}</option>
                 ))}
-              </div>
-              {/* First name */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                <label style={{ fontFamily: F, fontSize: 14, fontWeight: 400, color: C.text, textTransform: 'uppercase', letterSpacing: '0.08em' }}>First Name</label>
-                <input type="text" style={{
-                  fontFamily: F, fontSize: 16, fontWeight: 100, color: C.text,
-                  background: 'transparent', border: 'none', borderBottom: `1px solid ${C.border}`,
-                  padding: '8px 0', outline: 'none', width: '100%',
-                }} />
-              </div>
-              {/* Last name */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                <label style={{ fontFamily: F, fontSize: 14, fontWeight: 400, color: C.text, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Last Name</label>
-                <input type="text" style={{
-                  fontFamily: F, fontSize: 16, fontWeight: 100, color: C.text,
-                  background: 'transparent', border: 'none', borderBottom: `1px solid ${C.border}`,
-                  padding: '8px 0', outline: 'none', width: '100%',
-                }} />
-              </div>
-              {/* Email */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                <label style={{ fontFamily: F, fontSize: 14, fontWeight: 400, color: C.text, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Email</label>
-                <input type="email" style={{
-                  fontFamily: F, fontSize: 16, fontWeight: 100, color: C.text,
-                  background: 'transparent', border: 'none', borderBottom: `1px solid ${C.border}`,
-                  padding: '8px 0', outline: 'none', width: '100%',
-                }} />
-              </div>
-              {/* Country */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                <label style={{ fontFamily: F, fontSize: 14, fontWeight: 400, color: C.text, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Country</label>
-                <select style={{
-                  fontFamily: F, fontSize: 16, fontWeight: 100, color: C.text,
-                  background: 'transparent', border: 'none', borderBottom: `1px solid ${C.border}`,
-                  padding: '8px 0', outline: 'none', width: '100%', appearance: 'none',
-                }}>
-                  <option value="">Please select</option>
-                  {['Austria', 'Germany', 'Liechtenstein', 'Luxembourg', 'Switzerland', 'United Kingdom', 'United States'].map(c => (
-                    <option key={c} value={c}>{c}</option>
-                  ))}
-                </select>
-              </div>
-              {/* Message */}
-              <div style={{ gridColumn: '1 / -1', display: 'flex', flexDirection: 'column', gap: 8 }}>
-                <label style={{ fontFamily: F, fontSize: 14, fontWeight: 400, color: C.text, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Message</label>
-                <textarea rows={4} style={{
-                  fontFamily: F, fontSize: 16, fontWeight: 100, color: C.text,
-                  background: 'transparent', border: 'none', borderBottom: `1px solid ${C.border}`,
-                  padding: '8px 0', outline: 'none', width: '100%', resize: 'none',
-                }} />
-              </div>
-              {/* Submit */}
-              <div style={{ gridColumn: '1 / -1' }}>
-                <button type="submit" style={{
-                  fontFamily: F,
-                  fontSize: 14,
-                  fontWeight: 400,
-                  color: '#fff',
-                  background: C.accent,
-                  border: 'none',
-                  padding: '14px 40px',
-                  cursor: 'pointer',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.1em',
-                  transition: 'opacity 0.2s',
-                }}>
-                  Send message
-                </button>
-              </div>
-            </form>
-          </div>
-        </section>
-      </main>
+              </select>
+            </div>
+            <div className="kp-field" style={{ gridColumn: '1 / -1' }}>
+              <label>Message</label>
+              <textarea name="message" rows={4} />
+            </div>
+            <div style={{ gridColumn: '1 / -1' }}>
+              <button type="submit" className="kp-btn">Send message</button>
+            </div>
+          </form>
+        </div>
+      </section>
 
-      {/* FOOTER */}
-      <footer style={{
-        background: C.bg,
-        borderTop: `1px solid ${C.border}`,
-        padding: '32px 120px',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        fontFamily: F,
-        fontSize: 14,
-        fontWeight: 100,
-        color: C.text,
-      }}>
-        <span>© {new Date().getFullYear()} Kaiser Partner Finanzdienstleistungen AG · Liechtenstein</span>
-        <div style={{ display: 'flex', gap: 32 }}>
-          {['Imprint', 'Privacy', 'Cookie Policy'].map(l => (
-            <a key={l} href="#" style={{ color: C.text, textDecoration: 'none' }}>{l}</a>
-          ))}
-          <a href="/admin" style={{ color: C.accent, textDecoration: 'none' }}>Admin</a>
+      {/* ── FOOTER ───────────────────────────────────────────────────── */}
+      <footer className="kp-footer">
+        <div className="kp-container">
+          <div className="kp-footer-inner">
+            <span>© {new Date().getFullYear()} Kaiser Partner Finanzdienstleistungen AG · Liechtenstein</span>
+            <div style={{ display: 'flex', gap: 32 }}>
+              {['Imprint', 'Privacy', 'Cookie Policy'].map(l => (
+                <a key={l} href="#" style={{ color: TEXT, textDecoration: 'none', fontFamily: CALIBRI_LIGHT, fontSize: 15.2, fontWeight: 300 }}>{l}</a>
+              ))}
+              <a href="/admin" style={{ color: ACCENT, textDecoration: 'none', fontFamily: CALIBRI_LIGHT, fontSize: 15.2, fontWeight: 300 }}>Admin</a>
+            </div>
+          </div>
         </div>
       </footer>
     </>
