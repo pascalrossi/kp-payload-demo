@@ -1,0 +1,29 @@
+{
+  "name": "kp-demo",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "payload generate:importmap && payload generate:types && next build",
+    "start": "next start",
+    "generate:types": "payload generate:types",
+    "generate:importmap": "payload generate:importmap"
+  },
+  "dependencies": {
+    "@payloadcms/db-sqlite": "^3.7.0",
+    "@payloadcms/next": "^3.7.0",
+    "@payloadcms/richtext-lexical": "^3.7.0",
+    "graphql": "^17.0.2",
+    "next": "^15.1.7",
+    "payload": "^3.7.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sharp": "^0.33.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "typescript": "^5.0.0"
+  }
+}
