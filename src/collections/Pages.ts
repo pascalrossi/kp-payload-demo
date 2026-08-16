@@ -7,7 +7,6 @@ export const Pages: CollectionConfig = {
     useAsTitle: 'title',
     group: 'Inhalte',
   },
-  localization: true,
   fields: [
     {
       name: 'title',

@@ -8,8 +8,6 @@ export const Team: CollectionConfig = {
     useAsTitle: 'name',
     group: 'Inhalte',
   },
-  // Mehrsprachigkeit: ersetzt WPML — built-in in Payload
-  localization: true,
   fields: [
     {
       name: 'name',
