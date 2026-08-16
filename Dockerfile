@@ -35,6 +35,9 @@ COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
+# Native modules brauchen die originalen node_modules (nicht standalone-Version)
+COPY --from=deps --chown=nextjs:nodejs /app/node_modules ./node_modules
+
 USER nextjs
 EXPOSE 3000
 ENV PORT=3000
