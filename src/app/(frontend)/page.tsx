@@ -30,17 +30,18 @@ export default function HomePage() {
         body { background: ${BG}; color: ${TEXT}; }
 
         /* ── Nav ── */
-        .kp-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; height: 76px; background: ${BG}; display: flex; align-items: center; }
+        .kp-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; height: 76px; background: ${BG}; display: flex; align-items: center; border-bottom: 1px solid rgb(196,193,189); }
         .kp-nav-inner { width: 100%; max-width: 990px; margin: 0 auto; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; }
         .kp-nav-links { display: flex; align-items: center; gap: 36px; }
         .kp-nav-link { font-family: ${CAMBRIA}; font-size: 19px; font-weight: 400; color: ${TEXT}; text-decoration: none; text-transform: uppercase; }
         .kp-nav-link:hover { color: ${ACCENT}; }
         .kp-nav-contact { font-family: ${CAMBRIA}; font-size: 15.2px; color: ${ACCENT}; text-decoration: none; text-transform: uppercase; display: inline-flex; align-items: center; gap: 8px; border-left: 1px solid ${BORDER}; padding-left: 24px; margin-left: 12px; }
-        .kp-svc-card-link { color: ${ACCENT}; text-decoration: none; display: flex; flex-direction: column; height: 100%; }
+        .kp-svc-card-link { color: ${TEXT}; text-decoration: none; display: flex; flex-direction: column; height: 100%; }
+        .kp-svc-card-link:hover { color: ${TEXT}; }
         .kp-svc-icon { height: 77px; display: flex; align-items: flex-end; padding-bottom: 8px; }
         /* kpicons font */
         [class^="icon-"]:before, [class*=" icon-"]:before { font-family: 'kpicons'; font-style: normal; font-weight: normal; speak: never; display: inline-block; font-variant: normal; text-transform: none; line-height: 1; -webkit-font-smoothing: antialiased; }
-        .kp-icon.large { font-size: 64px; color: ${ACCENT}; }
+        .kp-icon.large { font-size: 76px; color: ${ACCENT}; position: relative; margin-left: -50%; left: -1.2rem; background-color: ${BG}; padding: 0 20%; }
         .kp-icon.small { font-size: 24px; color: ${ACCENT}; }
         .icon-compass-80:before { content: "\\e909"; }
         .icon-piechart-80:before { content: "\\e93e"; }
@@ -61,19 +62,20 @@ export default function HomePage() {
         .kp-container { max-width: 990px; margin: 0 auto; padding: 0 15px; }
 
         /* ── Services ── */
-        .kp-services { border-top: 1px solid ${BORDER}; padding: 60px 0 120px; }
+        .kp-services { padding: 0 0 0; }
         .kp-svc-grid { display: flex; flex-wrap: wrap; margin: 0 -15px; }
-        .kp-svc-col { flex: 0 0 33.333%; padding: 0 15px; margin-bottom: 30px; }
-        .kp-svc-card { border: 1px solid rgb(196, 193, 189); padding: 60px 25px 25px; height: 100%; display: flex; flex-direction: column; transition: border-color 0.2s; }
+        .kp-svc-col { flex: 0 0 33.333%; padding: 0 15px; margin-bottom: 100px; position: relative; display: flex; align-items: stretch; }
+        .kp-svc-card { position: relative; padding: 25px; padding-top: 60px; border: 1px solid rgb(196,193,189); text-align: center; height: auto; width: 100%; display: flex; flex-direction: column; transition: border-color 0.2s; }
         .kp-svc-card:hover { border-color: ${ACCENT}; }
         .kp-svc-card:hover .kp-svc-cta { opacity: 0.7; }
-        .kp-svc-title { font-family: ${CALIBRI_BOLD}; font-size: 20.9px; font-weight: 700; color: ${TEXT}; line-height: 1.1; margin-bottom: 12px; }
-        .kp-svc-desc { font-family: ${CALIBRI_LIGHT}; font-size: 20.9px; font-weight: 300; color: ${TEXT}; line-height: 1.5; flex: 1; margin-bottom: 24px; }
+        .kp-svc-icon-wrap { position: absolute; top: 0; left: 50%; margin-top: -40px; }
+        .kp-svc-title { font-family: ${CALIBRI_BOLD}; font-size: 20.9px; font-weight: 700; color: ${TEXT}; line-height: 1.1; margin-top: 20px; margin-bottom: 0; }
+        .kp-svc-desc { font-family: ${CALIBRI_LIGHT}; font-size: 20.9px; font-weight: 300; color: ${TEXT}; line-height: 1.5; flex: 1; margin-top: 5px; margin-bottom: 24px; }
         .kp-svc-cta { font-family: ${CALIBRI_BOLD}; font-size: 20.9px; font-weight: 700; color: ${ACCENT}; text-transform: uppercase; transition: opacity 0.2s; }
 
         /* ── Philosophy ── */
-        .kp-philo { border-top: 1px solid ${BORDER}; }
-        .kp-philo-banner { padding: 40px 0 0; margin-bottom: 40px; }
+        .kp-philo { }
+        .kp-philo-banner { height: 100px; display: flex; align-items: center; justify-content: center; border-top: 1px solid ${BORDER}; padding-top: 40px; margin-bottom: 40px; }
         .kp-philo-inner { padding-bottom: 80px; }
         .kp-philo-row { display: flex; gap: 0; margin: 0 -15px; }
         .kp-philo-col { flex: 0 0 50%; padding: 0 15px; }
@@ -177,11 +179,13 @@ export default function HomePage() {
       {/* ── SERVICES ─────────────────────────────────────────────────── */}
       <section className="kp-services" id="services">
         <div className="kp-container">
-          {/* Label */}
-          <h4 className="kp-label" style={{ marginBottom: 7.6 }}>SERVICES</h4>
+          {/* kp-banner — label centered in 100px tall block */}
+          <div style={{ height: 100, display: 'flex', alignItems: 'center', justifyContent: 'center', borderTop: `1px solid ${BORDER}`, paddingTop: 40 }}>
+            <h4 className="kp-label">Services</h4>
+          </div>
 
-          {/* Big heading — margin: 50px top, 120px bottom (from real site) */}
-          <h2 className="kp-h1" style={{ marginTop: 50, marginBottom: 120 }}>
+          {/* Big heading — centered, margin: 50px top, 120px bottom */}
+          <h2 className="kp-h1" style={{ textAlign: 'center', marginTop: 50, marginBottom: 120 }}>
             Learn how we can work best for you.
           </h2>
 
@@ -191,8 +195,8 @@ export default function HomePage() {
               <div key={i} className="kp-svc-col">
                 <div className="kp-svc-card">
                   <a href={svc.href} className="kp-svc-card-link" target="_blank" rel="noopener noreferrer">
-                    {/* Icon area — 77px tall, 64px kpicons font */}
-                    <div className="kp-svc-icon">
+                    {/* Icon — absolutely positioned at top-center, floating above card border */}
+                    <div className="kp-svc-icon-wrap">
                       <i className={`${svc.icon} kp-icon large`} />
                     </div>
                     {/* Content */}
