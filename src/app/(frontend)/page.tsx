@@ -30,19 +30,23 @@ export default function HomePage() {
         body { background: ${BG}; color: ${TEXT}; }
 
         /* ── Nav ── */
-        .kp-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; height: 76px; background: ${BG}; display: flex; align-items: center; border-bottom: 1px solid rgb(196,193,189); }
-        .kp-nav-inner { width: 100%; max-width: 990px; margin: 0 auto; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; }
-        .kp-nav-links { display: flex; align-items: center; gap: 36px; }
-        .kp-nav-link { font-family: ${CAMBRIA}; font-size: 19px; font-weight: 400; color: ${TEXT}; text-decoration: none; text-transform: uppercase; }
+        .kp-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; height: 5rem; background: ${BG}; display: flex; flex-direction: column; border-bottom: 1px solid rgb(196,193,189); }
+        .kp-nav-menu { width: 100vw; height: 5rem; display: flex; justify-content: space-between; align-items: stretch; }
+        .kp-nav-brand { max-width: 420px; width: 30%; height: 100%; display: flex; align-items: center; padding-left: 2rem; }
+        .kp-nav-brand img { height: 2.5rem; object-fit: contain; }
+        .kp-nav-links { display: flex; align-items: center; justify-content: center; height: 100%; gap: 2.25rem; flex: 1; max-width: 500px; }
+        .kp-nav-link { font-family: ${CAMBRIA}; font-size: 1.25rem; font-weight: lighter; color: ${TEXT}; text-decoration: none; text-transform: uppercase; }
         .kp-nav-link:hover { color: ${ACCENT}; }
-        .kp-nav-contact { font-family: ${CAMBRIA}; font-size: 15.2px; color: ${ACCENT}; text-decoration: none; text-transform: uppercase; display: inline-flex; align-items: center; gap: 8px; border-left: 1px solid ${BORDER}; padding-left: 24px; margin-left: 12px; }
+        .kp-nav-contact { font-family: ${CAMBRIA}; font-size: 15.2px; font-weight: lighter; color: ${ACCENT}; text-decoration: none; text-transform: uppercase; display: flex; align-items: center; gap: 8px; border-left: 1px solid ${BORDER}; padding: 0 1.5rem; }
         .kp-svc-card-link { color: ${TEXT}; text-decoration: none; display: flex; flex-direction: column; height: 100%; }
         .kp-svc-card-link:hover { color: ${TEXT}; }
         .kp-svc-icon { height: 77px; display: flex; align-items: flex-end; padding-bottom: 8px; }
         /* kpicons font */
         [class^="icon-"]:before, [class*=" icon-"]:before { font-family: 'kpicons'; font-style: normal; font-weight: normal; speak: never; display: inline-block; font-variant: normal; text-transform: none; line-height: 1; -webkit-font-smoothing: antialiased; }
-        .kp-icon.large { font-size: 76px; color: ${ACCENT}; position: relative; margin-left: -50%; left: -1.2rem; background-color: ${BG}; padding: 0 20%; }
+        .kp-icon.large { font-size: 76px; color: ${ACCENT}; }
         .kp-icon.small { font-size: 24px; color: ${ACCENT}; }
+        /* Service card icon — floating cutout effect */
+        .kp-svc-icon-wrap .kp-icon.large { position: relative; margin-left: -50%; left: -1.2rem; background-color: ${BG}; padding: 0 20%; }
         .icon-compass-80:before { content: "\\e909"; }
         .icon-piechart-80:before { content: "\\e93e"; }
         .icon-handleaf-80:before { content: "\\e93d"; }
@@ -53,13 +57,15 @@ export default function HomePage() {
         .icon-arrow-down-double-80:before { content: "\\e927"; }
 
         /* ── Hero ── */
-        .kp-hero { min-height: calc(100vh - 76px); display: flex; align-items: stretch; overflow: hidden; }
-        .kp-hero-text { flex: 0 0 40%; display: flex; flex-direction: column; justify-content: center; padding: 100px 60px 80px 80px; }
-        .kp-hero-image { flex: 1; display: flex; align-items: flex-end; }
-        .kp-hero-image img { width: 100%; height: auto; display: block; }
+        .kp-hero { margin-top: 5rem; height: calc(100vh - 5rem); display: flex; justify-content: center; overflow: hidden; }
+        .kp-hero-row { height: 100%; width: 100%; display: flex; margin-left: 5%; margin-right: 5%; max-width: 1400px; position: relative; }
+        .kp-hero-text { z-index: 11; width: 40%; align-self: flex-start; margin-top: 17%; }
+        .kp-hero-image { z-index: 10; position: relative; align-self: stretch; width: 60%; }
+        .kp-hero-image img { object-fit: contain; object-position: center center; width: 100%; height: 100%; display: block; }
+        .kp-hero-arrow { position: absolute; left: 50%; transform: translateX(-50%); bottom: 8vh; z-index: 100; }
 
         /* ── Section container ── */
-        .kp-container { max-width: 990px; margin: 0 auto; padding: 0 15px; }
+        .kp-container { max-width: 1140px; margin: 0 auto; padding: 0 15px; }
 
         /* ── Services ── */
         .kp-services { padding: 0 0 0; }
@@ -122,18 +128,19 @@ export default function HomePage() {
 
       {/* ── NAV ──────────────────────────────────────────────────────── */}
       <header className="kp-nav">
-        <div className="kp-nav-inner">
-          {/* Logo SVG */}
-          <a href="/" style={{ lineHeight: 0 }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="https://kaiserpartner.com/wp-content/themes/kp-wp-theme/img/illustrations/logo.svg"
-              alt="Kaiser Partner"
-              height={38}
-            />
-          </a>
+        <div className="kp-nav-menu">
+          {/* Logo — left 30% */}
+          <div className="kp-nav-brand">
+            <a href="/" style={{ lineHeight: 0 }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://kaiserpartner.com/wp-content/themes/kp-wp-theme/img/illustrations/logo.svg"
+                alt="Kaiser Partner"
+              />
+            </a>
+          </div>
 
-          {/* Nav links */}
+          {/* Nav links — center */}
           <nav className="kp-nav-links">
             {['WHY US', 'SERVICES', 'TEAM', 'CAREER'].map(item => (
               <a key={item} href={`#${item.toLowerCase().replace(' ', '-')}`} className="kp-nav-link">
@@ -142,7 +149,7 @@ export default function HomePage() {
             ))}
           </nav>
 
-          {/* CONTACT CTA — Cambria, terracotta, kpicons send icon */}
+          {/* CONTACT CTA — right */}
           <a href="#contact" className="kp-nav-contact">
             Contact <i className="icon-send-30 kp-icon small" />
           </a>
@@ -150,29 +157,32 @@ export default function HomePage() {
       </header>
 
       {/* ── HERO ─────────────────────────────────────────────────────── */}
-      <section className="kp-hero" style={{ paddingTop: 76 }}>
-        {/* Text column ~40% */}
-        <div className="kp-hero-text">
-          <h1 className="kp-h1" style={{ marginBottom: 16 }}>
-            Responsibility in Wealth
-          </h1>
-          <h2 className="kp-h2">
-            Kaiser Partner<br />Wealth Advisors
-          </h2>
-          {/* Bouncing down-arrow */}
-          <div style={{ marginTop: 80, animation: 'kp-bounce 2s infinite' }}>
-            <style>{`@keyframes kp-bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }`}</style>
+      <section className="kp-hero">
+        <div className="kp-hero-row">
+          {/* Text column — 40% width, starts at 17% from top */}
+          <div className="kp-hero-text">
+            <h1 className="kp-h1" style={{ marginBottom: '1rem' }}>
+              Responsibility in Wealth
+            </h1>
+            <h2 className="kp-h2">
+              Kaiser Partner Wealth Advisors
+            </h2>
+          </div>
+
+          {/* Building image — 60% width, full hero height, object-fit contain */}
+          <div className="kp-hero-image">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://kaiserpartner.com/wp-content/uploads/2018/03/KP-Campus.png"
+              alt="Kaiser Partner Campus Vaduz"
+            />
+          </div>
+
+          {/* Down-arrow — absolutely positioned at bottom center */}
+          <style>{`@keyframes kp-bounce { 0%,100%{margin-bottom:4px} 50%{margin-bottom:0} }`}</style>
+          <div className="kp-hero-arrow" style={{ animation: 'kp-bounce 0.4s infinite alternate' }}>
             <i className="icon-arrow-down-double-80 kp-icon large" />
           </div>
-        </div>
-
-        {/* Building image ~60% */}
-        <div className="kp-hero-image">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="https://kaiserpartner.com/wp-content/uploads/2018/03/KP-Campus.png"
-            alt="Kaiser Partner Campus Vaduz"
-          />
         </div>
       </section>
 
