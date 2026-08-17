@@ -12,24 +12,14 @@ const CALIBRI_LIGHT = '"Calibri Light", "Lato", "Segoe UI", Arial, sans-serif'
 const CALIBRI_BOLD  = '"Calibri Bold",  "Lato", "Segoe UI", Arial, sans-serif'
 const CAMBRIA       = 'Cambria, Georgia, serif'
 
-// SVG icons matching kp-icon style (thin line, 48px)
-const ICONS: Record<string, string> = {
-  compass: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="24" cy="24" r="20"/><polygon points="32,16 20,28 16,32 28,20" fill="currentColor" stroke="none"/><circle cx="24" cy="24" r="2" fill="${'rgb(236,236,230)'}" stroke="currentColor"/></svg>`,
-  chart:   `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"><rect x="8" y="28" width="7" height="14"/><rect x="21" y="18" width="7" height="24"/><rect x="34" y="8" width="7" height="34"/><path d="M8 14 L24 8 L40 4" strokeWidth="1.2"/></svg>`,
-  family:  `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="24" cy="14" r="6"/><path d="M14 42v-4a10 10 0 0 1 20 0v4"/><circle cx="10" cy="20" r="4"/><path d="M4 42v-3a7 7 0 0 1 12-4.9"/><circle cx="38" cy="20" r="4"/><path d="M44 42v-3a7 7 0 0 0-12-4.9"/></svg>`,
-  building:`<svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"><rect x="8" y="4" width="32" height="40"/><rect x="16" y="12" width="6" height="6"/><rect x="26" y="12" width="6" height="6"/><rect x="16" y="24" width="6" height="6"/><rect x="26" y="24" width="6" height="6"/><rect x="18" y="36" width="12" height="8"/></svg>`,
-  shield:  `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"><path d="M24 4L8 10v14c0 10 7 18.5 16 22 9-3.5 16-12 16-22V10L24 4z"/></svg>`,
-  inherit: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="24" cy="10" r="6"/><path d="M24 16v8"/><path d="M16 32h16"/><circle cx="12" cy="38" r="6"/><circle cx="36" cy="38" r="6"/><path d="M12 32v0"/><path d="M36 32v0"/></svg>`,
-}
-
-// ─── Service data ────────────────────────────────────────────────────────────
+// ─── Service data (icon classes from kpicons font) ───────────────────────────
 const SERVICES = [
-  { title: 'Wealth Advisory',        icon: 'compass',  desc: 'Our goal is to safeguard wealth down the generations. We bring the best experts together and coordinate external partners at our Wealth Table:', cta: 'TAKE A SEAT',       href: 'https://kaiserpartner.com/services/wealth-advisory/' },
-  { title: 'Reporting & Controlling',icon: 'chart',    desc: 'A reliable overview of how your assets are performing will give you greater certainty. Our services offer new insights and control options:',   cta: 'GAIN INSIGHTS',    href: 'https://kaiserpartner.com/services/wealth-reporting-and-controlling/' },
-  { title: 'Family Office',          icon: 'family',   desc: 'We support wealthy families: concierge services, family seminars and advice on, for example, relocation, private investments, real estate, philanthropy and education.', cta: 'LET US HELP',   href: 'https://kaiserpartner.com/services/family-office/' },
-  { title: 'Fiduciary Services',     icon: 'building', desc: 'Wealth benefits from an appropriate structure. We can advise you and set up structures for you to suit your needs, including family foundations, holding structures and trusts in Liechtenstein and around the world.', cta: 'USE STRUCTURES', href: 'https://kaiserpartner.com/services/fiduciary-services/' },
-  { title: 'Asset Protection',       icon: 'shield',   desc: 'Protect what is most important to you. We grow wealth sustainably and create concepts for structures to protect your assets comprehensively and for the long term.',     cta: 'PROTECTING ASSETS', href: 'https://kaiserpartner.com/solution/asset-protection-a-holistic-task/' },
-  { title: 'Inheritance Planning',   icon: 'inherit',  desc: 'Businesses, property, collections... wealth comes in many shapes and forms. Transferring assets to the next generation is often complex, but with the right strategy, you can safeguard your interests.', cta: 'TAKE PRECAUTIONS', href: 'https://kaiserpartner.com/solution/good-inheritance-planning-doesnt-happen-under-time-pressure/' },
+  { title: 'Wealth Advisory',        icon: 'icon-compass-80',  desc: 'Our goal is to safeguard wealth down the generations. We bring the best experts together and coordinate external partners at our Wealth Table:', cta: 'TAKE A SEAT',       href: 'https://kaiserpartner.com/services/wealth-advisory/' },
+  { title: 'Reporting & Controlling',icon: 'icon-piechart-80', desc: 'A reliable overview of how your assets are performing will give you greater certainty. Our services offer new insights and control options:',   cta: 'GAIN INSIGHTS',    href: 'https://kaiserpartner.com/services/wealth-reporting-and-controlling/' },
+  { title: 'Family Office',          icon: 'icon-handleaf-80', desc: 'We support wealthy families: concierge services, family seminars and advice on, for example, relocation, private investments, real estate, philanthropy and education.', cta: 'LET US HELP',   href: 'https://kaiserpartner.com/services/family-office/' },
+  { title: 'Fiduciary Services',     icon: 'icon-network-80',  desc: 'Wealth benefits from an appropriate structure. We can advise you and set up structures for you to suit your needs, including family foundations, holding structures and trusts in Liechtenstein and around the world.', cta: 'USE STRUCTURES', href: 'https://kaiserpartner.com/services/fiduciary-services/' },
+  { title: 'Asset Protection',       icon: 'icon-umbrella-80', desc: 'Protect what is most important to you. We grow wealth sustainably and create concepts for structures to protect your assets comprehensively and for the long term.',     cta: 'PROTECTING ASSETS', href: 'https://kaiserpartner.com/solution/asset-protection-a-holistic-task/' },
+  { title: 'Inheritance Planning',   icon: 'icon-people-80',   desc: 'Businesses, property, collections... wealth comes in many shapes and forms. Transferring assets to the next generation is often complex, but with the right strategy, you can safeguard your interests.', cta: 'TAKE PRECAUTIONS', href: 'https://kaiserpartner.com/solution/good-inheritance-planning-doesnt-happen-under-time-pressure/' },
 ]
 
 export default function HomePage() {
@@ -47,7 +37,19 @@ export default function HomePage() {
         .kp-nav-link:hover { color: ${ACCENT}; }
         .kp-nav-contact { font-family: ${CAMBRIA}; font-size: 15.2px; color: ${ACCENT}; text-decoration: none; text-transform: uppercase; display: inline-flex; align-items: center; gap: 8px; border-left: 1px solid ${BORDER}; padding-left: 24px; margin-left: 12px; }
         .kp-svc-card-link { color: ${ACCENT}; text-decoration: none; display: flex; flex-direction: column; height: 100%; }
-        .kp-svc-icon { height: 77px; display: flex; align-items: flex-end; padding-bottom: 16px; color: ${ACCENT}; }
+        .kp-svc-icon { height: 77px; display: flex; align-items: flex-end; padding-bottom: 8px; }
+        /* kpicons font */
+        [class^="icon-"]:before, [class*=" icon-"]:before { font-family: 'kpicons'; font-style: normal; font-weight: normal; speak: never; display: inline-block; font-variant: normal; text-transform: none; line-height: 1; -webkit-font-smoothing: antialiased; }
+        .kp-icon.large { font-size: 64px; color: ${ACCENT}; }
+        .kp-icon.small { font-size: 24px; color: ${ACCENT}; }
+        .icon-compass-80:before { content: "\\e909"; }
+        .icon-piechart-80:before { content: "\\e93e"; }
+        .icon-handleaf-80:before { content: "\\e93d"; }
+        .icon-network-80:before { content: "\\e922"; }
+        .icon-umbrella-80:before { content: "\\e93c"; }
+        .icon-people-80:before { content: "\\e916"; }
+        .icon-send-30:before { content: "\\e93b"; }
+        .icon-arrow-down-double-80:before { content: "\\e927"; }
 
         /* ── Hero ── */
         .kp-hero { min-height: calc(100vh - 76px); display: flex; align-items: stretch; overflow: hidden; }
@@ -138,13 +140,9 @@ export default function HomePage() {
             ))}
           </nav>
 
-          {/* CONTACT CTA — Cambria, terracotta, send icon (same as original) */}
+          {/* CONTACT CTA — Cambria, terracotta, kpicons send icon */}
           <a href="#contact" className="kp-nav-contact">
-            Contact
-            {/* Send / paper-plane icon matching kp icon-send-30 */}
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" style={{display:'inline-block'}}>
-              <path d="M22 2L11 13M22 2L15 22L11 13L2 9L22 2Z" stroke={ACCENT} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+            Contact <i className="icon-send-30 kp-icon small" />
           </a>
         </div>
       </header>
@@ -160,9 +158,9 @@ export default function HomePage() {
             Kaiser Partner<br />Wealth Advisors
           </h2>
           {/* Bouncing down-arrow */}
-          <div style={{ marginTop: 80, color: ACCENT, fontSize: 28, animation: 'kp-bounce 2s infinite' }}>
+          <div style={{ marginTop: 80, animation: 'kp-bounce 2s infinite' }}>
             <style>{`@keyframes kp-bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }`}</style>
-            ↓
+            <i className="icon-arrow-down-double-80 kp-icon large" />
           </div>
         </div>
 
@@ -193,8 +191,10 @@ export default function HomePage() {
               <div key={i} className="kp-svc-col">
                 <div className="kp-svc-card">
                   <a href={svc.href} className="kp-svc-card-link" target="_blank" rel="noopener noreferrer">
-                    {/* Icon area — 77px tall matching original */}
-                    <div className="kp-svc-icon" dangerouslySetInnerHTML={{ __html: ICONS[svc.icon] }} />
+                    {/* Icon area — 77px tall, 64px kpicons font */}
+                    <div className="kp-svc-icon">
+                      <i className={`${svc.icon} kp-icon large`} />
+                    </div>
                     {/* Content */}
                     <div className="kp-svc-title">{svc.title}</div>
                     <p className="kp-svc-desc">{svc.desc}</p>
